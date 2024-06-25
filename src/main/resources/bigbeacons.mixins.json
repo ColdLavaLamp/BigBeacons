@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "easton.bigbeacons.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "AbstractInventoryMixin",
+    "BeaconBlockEntityMixin",
+    "BeaconScreenHandlerMixin",
+    "EnchantmentHelperMixin",
+    "FortuneInject",
+    "PlayerManagerMixin",
+    "ServerPlayerEntityMixin"
+  ],
+  "client": [
+    "BeaconScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
