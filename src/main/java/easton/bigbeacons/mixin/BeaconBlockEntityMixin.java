@@ -8,18 +8,15 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.List;
 import java.util.Objects;
@@ -56,7 +53,7 @@ public class BeaconBlockEntityMixin {
                 playerEntity.addStatusEffect(new StatusEffectInstance(primaryEffect, j, 2, true, true));
             }
         }
-        if (beaconLevel >= 16) {
+        if (world.getGameRules().getBoolean(BigBeacons.BEACON_FLIGHT) && beaconLevel >= 16) {
             RegistryEntry<StatusEffect> flight = Registries.STATUS_EFFECT.getEntry(BigBeacons.FLIGHT);
             for (PlayerEntity player : list) {
                 // we can't give the effect to vanilla players, it will cause them to disconnect since they don't know what it is
