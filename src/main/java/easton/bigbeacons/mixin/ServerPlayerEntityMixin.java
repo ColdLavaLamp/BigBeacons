@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Collection;
+
 @Mixin(ServerPlayerEntity.class)
 public class ServerPlayerEntityMixin implements PlayerModdedDuck {
 
@@ -25,9 +27,10 @@ public class ServerPlayerEntityMixin implements PlayerModdedDuck {
         this.hasMod = modded;
     }
 
-    @Inject(method = "onStatusEffectRemoved", at = @At("TAIL"))
-    private void doRemoveFlight(StatusEffectInstance effect, CallbackInfo ci) {
-        if (effect.getEffectType().value() == BigBeacons.FLIGHT) {
+    @Inject(method = "onStatusEffectsRemoved", at = @At("TAIL"))
+    private void doRemoveFlight(Collection<StatusEffectInstance> effects, CallbackInfo ci) {
+
+        if (effects.stream().anyMatch(effect -> effect.getEffectType().value() == BigBeacons.FLIGHT)) {
             ServerPlayerEntity player = (ServerPlayerEntity) (Object)this;
             if (!player.isSpectator() && !player.isCreative()) {
                 player.getAbilities().allowFlying = false;

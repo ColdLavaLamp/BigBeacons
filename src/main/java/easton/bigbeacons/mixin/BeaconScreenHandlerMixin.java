@@ -32,18 +32,18 @@ public abstract class BeaconScreenHandlerMixin extends ScreenHandler {
             method = "<init>(ILnet/minecraft/inventory/Inventory;Lnet/minecraft/screen/PropertyDelegate;Lnet/minecraft/screen/ScreenHandlerContext;)V",
             constant = @Constant(intValue = 136)
     )
-    private static int movePaymentSlotOffScreen(int curr) {
+    private int movePaymentSlotOffScreen(int curr) {
         return 1000000;
     }
 
     @ModifyArgs(
             method = "<init>(ILnet/minecraft/inventory/Inventory;Lnet/minecraft/screen/PropertyDelegate;Lnet/minecraft/screen/ScreenHandlerContext;)V",
-            at = @At(value = "INVOKE", target = "net/minecraft/screen/slot/Slot.<init>(Lnet/minecraft/inventory/Inventory;III)V")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/BeaconScreenHandler;addPlayerSlots(Lnet/minecraft/inventory/Inventory;II)V")
     )
     private void moveInventorySlots(Args args) {
         if (userHasMod(args)) {
-            args.set(2, (int) args.get(2) + 26);
-            args.set(3, (int) args.get(3) + 7);
+            args.set(1, (int) args.get(1) + 26);
+            args.set(2, (int) args.get(2) + 7);
         }
     }
 

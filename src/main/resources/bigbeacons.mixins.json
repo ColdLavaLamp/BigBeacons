@@ -4,7 +4,7 @@
   "package": "easton.bigbeacons.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "AbstractInventoryMixin",
+    "StatusEffectsDisplayMixin",
     "BeaconBlockEntityMixin",
     "BeaconScreenHandlerMixin",
     "EnchantmentHelperMixin",

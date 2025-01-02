@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 
 public record BasicPayload(boolean dummy) implements CustomPayload {
     public static final CustomPayload.Id<BasicPayload> ID = new CustomPayload.Id<>(BigBeacons.PACKET_ID);
-    public static final PacketCodec<RegistryByteBuf, BasicPayload> CODEC = PacketCodec.tuple(PacketCodecs.BOOL, BasicPayload::dummy, BasicPayload::new);
+    public static final PacketCodec<RegistryByteBuf, BasicPayload> CODEC = PacketCodec.tuple(PacketCodecs.BOOLEAN, BasicPayload::dummy, BasicPayload::new);
 
     @Override
     public CustomPayload.Id<? extends CustomPayload> getId() {
